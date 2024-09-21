@@ -11,7 +11,7 @@
         <h1>Movie Management</h1>
         <div id="movieForm">
             <h2>Add Movie</h2>
-            <input type="text" id="isbn" placeholder="ISBN">
+            <input type="text" id="isbn" placeholder="ISBN" pattern="^\d{13}$" title="Please enter a 13-digit ISBN" required>
             <input type="text" id="title" placeholder="Title">
             <input type="text" id="directorFirstname" placeholder="Director Firstname">
             <input type="text" id="directorLastname" placeholder="Director Lastname">
@@ -21,7 +21,18 @@
             <h2>Movies</h2>
             <ul id="movies"></ul>
         </div>
+        <div id="updateForm" style="display:none;">
+            <h2>Update Movie</h2>
+            <input type="text" id="updateId" hidden>
+            <input type="text" id="updateIsbn" placeholder="ISBN">
+            <input type="text" id="updateTitle" placeholder="Title">
+            <input type="text" id="updateDirectorFirstname" placeholder="Director Firstname">
+            <input type="text" id="updateDirectorLastname" placeholder="Director Lastname">
+            <button onclick="updateMovie()">Update Movie</button>
+            <button onclick="cancelUpdate()">Cancel</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
