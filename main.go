@@ -25,19 +25,26 @@ type Director struct {
 
 var movies []Movie
 
+
+
 func main() {
 	r := mux.NewRouter()
 
+	// Existing movie data
 	movies = append(movies, Movie{
-		ID: "1", Isbn: "438227", Title: "Luxembourg", Director: &Director{Firstname: "Antonio ", Lastname: "Lukich"}})
+		ID: "1", Isbn: "438227", Title: "Luxembourg", Director: &Director{Firstname: "Antonio", Lastname: "Lukich"}})
 	movies = append(movies, Movie{
 		ID: "2", Isbn: "832329", Title: "Shadows of Forgotten Ancestors", Director: &Director{Firstname: "Sergiy", Lastname: "Parajanov"}})
 
+	// API routes
 	r.HandleFunc("/movies", getMovies).Methods("GET")
 	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
 	r.HandleFunc("/movies", createMovie).Methods("POST")
 	r.HandleFunc("/movies/{id}", updateMovie).Methods("PUT")
 	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
+
+	// Serve static files
+	r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./static/"))))
 
 	fmt.Printf("Starting server at :8000 port\n")
 	log.Fatal(http.ListenAndServe(":8000", r))

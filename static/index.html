@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Management</h1>
+        <div id="movieForm">
+            <h2>Add Movie</h2>
+            <input type="text" id="isbn" placeholder="ISBN">
+            <input type="text" id="title" placeholder="Title">
+            <input type="text" id="directorFirstname" placeholder="Director Firstname">
+            <input type="text" id="directorLastname" placeholder="Director Lastname">
+            <button onclick="addMovie()">Add Movie</button>
+        </div>
+        <div id="moviesList">
+            <h2>Movies</h2>
+            <ul id="movies"></ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
