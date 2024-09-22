@@ -1,0 +1,40 @@
+pipeline {
+    agent any 
+
+    environment {
+        PROJECT_NAME="Jenkins pipeline for simple crud app "
+        OWNER_NAME="wannabelll"
+        GOPATH = "${env.WORKSPACE}/go"
+        GOCACHE = "${env.WORKSPACE}/.cache/go-build"
+         PATH = "${PATH}:/usr/local/go/bin"  
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+               git branch: 'main', credentialsId: 'ssh-private-key-v1.0', url: 'git@github.com:wannabelll/crud-api_GO.git'
+               sh 'whoami '
+                 sh 'echo $OWNER_NAME' 
+               sh 'date'
+            }
+        }
+        stage('Setup Go') {
+            steps {
+                sh 'mkdir -p $GOPATH/src $GOPATH/bin $GOPATH/pkg'
+                sh 'mkdir -p $GOCACHE'  // Ensure the cache directory exists
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'go build -o myapp .'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'go test ./...'
+            }
+        }
+    }
+}
+
+
